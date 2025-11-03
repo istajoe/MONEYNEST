@@ -6,9 +6,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 export const requireAuth = async (req, res, next) => {
   try {
-    // ===========================
-    // ✅ 1. Read token from both cookie & header
-    // ===========================
+    
+    // 1. Read token from both cookie & header
+    
     let token = null;
 
     // Try cookie first
@@ -28,9 +28,9 @@ export const requireAuth = async (req, res, next) => {
       });
     }
 
-    // ===========================
-    // ✅ 2. Verify and decode JWT
-    // ===========================
+
+    // 2. Verify and decode JWT
+  
     const decoded = jwt.verify(token, JWT_SECRET);
 
     if (!decoded?.userId) {
@@ -39,9 +39,9 @@ export const requireAuth = async (req, res, next) => {
         .json({ success: false, message: "Invalid token structure" });
     }
 
-    // ===========================
-    // ✅ 3. Fetch user from DB
-    // ===========================
+
+    // 3. Fetch user from DB
+    
     const user = await User.findById(decoded.userId).select("-password");
 
     if (!user) {
@@ -51,9 +51,9 @@ export const requireAuth = async (req, res, next) => {
       });
     }
 
-    // ===========================
-    // ✅ 4. Attach user & continue
-    // ===========================
+    
+    //  4. Attach user & continue
+    
     req.user = user;
     next();
   } catch (err) {
