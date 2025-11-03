@@ -1,0 +1,115 @@
+.banking-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5rem 10%;
+  background: #f3f9ff;
+  position: relative;
+  overflow: hidden;
+}
+
+.banking-content {
+  max-width: 50%;
+}
+
+.banking-tag {
+  background: #cfe8ff;
+  color: #004aad;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.banking-content h1 {
+  font-size: 3rem;
+  color: #0b132b;
+  font-weight: 800;
+  margin: 1rem 0;
+  line-height: 1.2;
+}
+
+.banking-content p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.partner-btn {
+  background: #0066ff;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.partner-btn:hover {
+  background: #004add;
+}
+
+.banking-image {
+  position: relative;
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balance-card {
+  background: linear-gradient(90deg, #0066ff, #004add);
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px 40px;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  z-index: 2;
+  box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+}
+
+.balance-card p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.balance-card h2 {
+  font-size: 1.6rem;
+  margin: 0.3rem 0 0;
+}
+
+.banking-actions {
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  z-index: 2;
+}
+
+.action-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-5px);
+}
+
+.banking-lady {
+  width: 360px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,56 @@
+.solutions {
+  padding: 50px 20px;
+  text-align: center;
+  background: #f9fcff;
+  font-family: Arial, sans-serif;
+}
+
+.solutions-header h1 {
+  font-size: 2rem;
+  color: #0a1a3c;
+  margin-bottom: 10px;
+}
+
+.solutions-header p {
+  font-size: 1rem;
+  color: #5a6c7d;
+  margin-bottom: 40px;
+}
+
+.solutions-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: left;
+}
+
+.card h2 {
+  color: #0a1a3c;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #5a6c7d;
+  margin-bottom: 20px;
+}
+
+.card a {
+  color: #0073e6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}

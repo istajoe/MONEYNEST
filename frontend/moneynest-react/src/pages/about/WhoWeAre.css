@@ -1,0 +1,61 @@
+/* ===== Who We Are Section ===== */
+.who-we-are {
+  background-color: #ffffff;
+  color: #001a4d;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.who-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  max-width: 1200px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+/* Left column */
+.who-text h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #002366;
+  margin-bottom: 1.5rem;
+}
+
+/* Paragraph styling */
+.who-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #102a43;
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive layout */
+@media (max-width: 992px) {
+  .who-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .who-text h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .who-text p {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .who-we-are {
+    padding: 4rem 1.5rem;
+  }
+
+  .who-text p {
+    font-size: 1rem;
+  }
+}
+

@@ -1,0 +1,164 @@
+/* =============================== */
+/* MONEYNEST REGISTER PAGE STYLES  */
+/* =============================== */
+
+.register-page {
+  display: flex;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #f9fafc;
+  overflow: hidden;
+}
+
+/* Left Hero Section */
+.register-page-hero {
+  flex: 1.2;
+  background: linear-gradient(135deg, #002b7f, #0056ff);
+  color: #fff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1624362591806-6a32a4a7e485?auto=format&fit=crop&w=1200&q=80")
+    center/cover no-repeat;
+  opacity: 0.25;
+}
+
+.register-page-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 43, 127, 0.6);
+}
+
+.register-page-hero-content {
+  position: relative;
+  text-align: center;
+  max-width: 400px;
+}
+
+.register-page-hero-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.register-page-hero-content p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* Right Form Section */
+.register-page-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.register-page-box {
+  width: 90%;
+  max-width: 420px;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.register-page-box h2 {
+  color: #002b7f;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.register-page-subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.register-page-box label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.register-page-box input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+}
+
+.register-page-box input:focus {
+  border-color: #0056ff;
+  outline: none;
+}
+
+.register-page-box button {
+  width: 100%;
+  background: linear-gradient(90deg, #002b7f, #0056ff);
+  color: #fff;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.register-page-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 86, 255, 0.3);
+}
+
+.register-page-error {
+  color: #e11d48;
+  background: #fee2e2;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.register-page-login {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #6b7280;
+}
+
+.register-page-login a {
+  color: #0056ff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register-page-login a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .register-page {
+    flex-direction: column;
+  }
+
+  .register-page-hero {
+    height: 250px;
+    flex: none;
+  }
+
+  .register-page-box {
+    margin-top: 1rem;
+  }
+}

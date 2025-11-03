@@ -1,0 +1,85 @@
+/* ===== Impact Banner Section ===== */
+.impact-banner1 {
+  background-color: #f8fbff;
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.impact-container1 {
+  background: linear-gradient(135deg, #001a72 0%, #0033aa 100%);
+  color: white;
+  border-radius: 2rem;
+  padding: 3rem 4rem;
+  max-width: 1100px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 26, 77, 0.1);
+}
+
+/* Main text */
+.impact-text1 {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.highlight1 {
+  color: #f8d86b;
+  font-weight: 700;
+}
+
+.highlight2 {
+  color: #a8e6cf;
+  font-weight: 600;
+}
+
+/* Button styling */
+.impact-btn1 {
+  background-color: #f8d86b;
+  color: #001a72;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.impact-btn1:hover {
+  background-color: #ffffff;
+  color: #001a72;
+  transform: translateY(-2px);
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .impact-container1 {
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+  }
+
+  .impact-text1 {
+    font-size: 1.4rem;
+  }
+
+  .impact-btn1 {
+    font-size: 1rem;
+    padding: 10px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .impact-text1 {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .impact-btn1 {
+    font-size: 0.95rem;
+    padding: 8px 18px;
+  }
+}

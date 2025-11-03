@@ -1,0 +1,18 @@
+.top-banner {
+  background-color: black;
+  color: #ddd;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-align: center;
+}
+
+.global-btn {
+  margin-left: 8px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}

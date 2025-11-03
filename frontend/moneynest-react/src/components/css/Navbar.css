@@ -1,0 +1,293 @@
+/* ============================= */
+/* 🌐 NAVBAR BASE STYLES         */
+/* ============================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: #0a1b3c;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ============================= */
+/* 💎 LOGO SECTION               */
+/* ============================= */
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.logo-box {
+  background: white;
+  color: #0a1b3c;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 4px 10px;
+  margin-right: 8px;
+  border-radius: 6px;
+}
+
+/* ============================= */
+/* 🔗 NAVIGATION LINKS           */
+/* ============================= */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 28px;
+  align-items: center;
+}
+
+.nav-links .dropdown {
+  position: relative;
+}
+
+.nav-links .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px;
+  padding: 10px 0;
+  min-width: 180px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-links .dropdown-menu li{
+  list-style: none;
+}
+
+.nav-links .dropdown-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+  border-radius: 8px;
+}
+
+/* Hover effect*/
+.nav-links .dropdown-menu li a .icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d6e4ff;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.nav-links a,
+.dropdown-btn {
+  text-decoration: none;
+  color: #000;
+  background: none;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover,
+.dropdown-btn:hover {
+  color: white;
+}
+
+/* ============================= */
+/* ⚙️ SOLUTIONS DROPDOWN MENU    */
+/* ============================= */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Base dropdown styling */
+.dropdown-menu,
+.resources-dropdown {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  background: white;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 999;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown:hover .resources-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ============================= */
+/* 🧭 RESOURCES DROPDOWN STYLES  */
+/* ============================= */
+.resources-dropdown {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #0a1b3c;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 10px 16px;
+  transition: background 0.25s ease;
+}
+
+.dropdown-item:hover {
+  background: #f5f7fa;
+}
+
+.dropdown-icon {
+  background: #e6efff;
+  border-radius: 8px;
+  padding: 6px;
+  font-size: 16px;
+  margin-right: 12px;
+}
+
+/* Dropdown arrow beside Resources */
+.dropdown-arrow {
+  font-size: 11px;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+/* ============================= */
+/* 🔹 SOLUTIONS DROPDOWN CONTENT */
+/* ============================= */
+.dropdown-menu {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 1.5rem;
+  min-width: 420px;
+}
+
+.dropdown-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+.dropdown-column h4 {
+  font-size: 0.95rem;
+  color: #0a1b3c;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.dropdown-column a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.85rem;
+  margin: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.dropdown-column a:hover {
+  color: #1d9bf0;
+}
+
+/* ============================= */
+/* 🧩 SIGN UP BUTTON             */
+/* ============================= */
+.signup-btn {
+  background: #1d9bf0;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.signup-btn:hover {
+  background: #0a8adc;
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* 📱 RESPONSIVE DESIGN          */
+/* ============================= */
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+  }
+
+  .dropdown-menu,
+  .resources-dropdown {
+    position: static;
+    display: none;
+    flex-direction: column;
+    min-width: 260px;
+    gap: 1rem;
+    box-shadow: none;
+    border-radius: 6px;
+    background: #fff;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    padding: 0.5rem 0;
+  }
+
+  .dropdown:hover .dropdown-menu,
+  .dropdown:hover .resources-dropdown {
+    display: flex;
+  }
+}
+
+/* ============================= */
+/* ✨ ANIMATIONS (optional)      */
+/* ============================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

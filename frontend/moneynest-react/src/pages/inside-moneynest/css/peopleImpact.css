@@ -1,0 +1,75 @@
+.people-section1 {
+  background-color: #001a33; /* deep blue */
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 220px !important;
+  margin-bottom: 3rem;
+  margin: 0 auto 3rem auto; /* centers and adds bottom space */
+  width: 95%; /* reduce overall width */
+  border-radius: 1rem; /* optional, adds soft rounded corners */
+
+}
+
+.people-container1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
+  width: 80%;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* === LEFT TEXT === */
+.people-text1 h2 {
+  font-size: 2.8rem;
+  line-height: 1.3;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.people-text1 .highlight {
+  color: #f8d86b; /* gold accent */
+}
+
+.people-text1 p {
+  color: #d0d8e8;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+/* === RIGHT IMAGE === */
+.people-image1 img {
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 900px) {
+  .people-container1 {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .people-text1 {
+    order: 2;
+  }
+
+  .people-image1 {
+    order: 1;
+  }
+
+  .people-text1 h2 {
+    font-size: 2rem;
+  }
+
+  .people-text1 p {
+    font-size: 1rem;
+    margin: 0 auto;
+  }
+}

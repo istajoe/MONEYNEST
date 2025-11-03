@@ -1,0 +1,2 @@
+GET http://localhost:5000/api/auth/me
+Authorization: Bearer e67e32fd3a23084cdd2c6ce004d361c6e852248ef1848ef15cc0e6a99b27c65bed8827bb315d87465a7a3bcc8ab87ce68ab9a007486ef1fb458eae5aafecf12a

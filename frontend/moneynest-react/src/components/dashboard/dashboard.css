@@ -1,0 +1,63 @@
+/* src/components/Dashboard/Dashboard.css */
+.dashboard-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f3f4f6;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-container h1 {
+  margin-bottom: 1.5rem;
+  color: #1d4ed8;
+}
+
+.contribution-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.contribution-form input {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+}
+
+.contribution-form button {
+  padding: 0.6rem 1rem;
+  background-color: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contribution-form button:hover {
+  background-color: #2563eb;
+}
+
+.contribution-history {
+  margin-top: 1rem;
+}
+
+.contribution-history table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.contribution-history th,
+.contribution-history td {
+  padding: 0.8rem;
+  border: 1px solid #cbd5e1;
+  text-align: left;
+}
+
+.contribution-history th {
+  background-color: #1d4ed8;
+  color: white;
+}

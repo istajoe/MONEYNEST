@@ -1,0 +1,133 @@
+.dashboard-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.balance span {
+  color: #1E90FF;
+  font-weight: bold;
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background: #FF4C4C;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.transaction-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+.transaction-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.type-btn {
+  padding: 10px 16px;
+  border: 1px solid #1E90FF;
+  background: #fff;
+  color: #1E90FF;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.type-btn.active,
+.type-btn:hover {
+  background: #1E90FF;
+  color: #fff;
+}
+
+.transaction-form input,
+.conditional-inputs input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #1E90FF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #187bcd;
+}
+
+.transactions-list {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.transactions-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.tx-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.tx-item:last-child {
+  border-bottom: none;
+}
+
+.status.completed {
+  color: green;
+  font-weight: bold;
+}
+
+.status.failed {
+  color: red;
+  font-weight: bold;
+}
+
+.status.pending {
+  color: orange;
+  font-weight: bold;
+}
+

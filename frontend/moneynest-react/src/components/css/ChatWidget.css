@@ -1,0 +1,12 @@
+.chat-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #1d9bf0;
+  color: white;
+  font-size: 22px;
+  padding: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,54 @@
+.culture-section {
+  padding: 80px 10%;
+  background-color: #fff;
+  text-align: center;
+}
+
+.culture-header h2 {
+  font-size: 2rem;
+  color: #0a0a0a;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.culture-header p {
+  font-size: 1.1rem;
+  color: #5a5a5a;
+  max-width: 600px;
+  margin: 0 auto 60px;
+  line-height: 1.6;
+}
+
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-content: center;
+}
+
+.culture-card {
+  background-color: #0057ff;
+  border-radius: 20px;
+  padding: 20px;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.culture-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.culture-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.culture-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 87, 255, 0.2);
+}

@@ -1,0 +1,118 @@
+/* ========= ABOUT HERO SECTION ========= */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  background: linear-gradient(135deg, #00c6ff 100%);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Background Overlay */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 50, 0.25);
+  backdrop-filter: blur(3px);
+}
+
+/* Main text container */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  animation: fadeInUp 1.2s ease-in-out;
+}
+
+/* Tagline */
+.tagline {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Heading */
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.hero-text p {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #d7ebff;
+  margin-bottom: 2rem;
+}
+
+/* Join Us button */
+.join-btn {
+  padding: 0.9rem 2.5rem;
+  background-color: #fff;
+  color: #0055ff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.join-btn:hover {
+  background-color: #e9f2ff;
+  transform: translateY(-3px);
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========= RESPONSIVE DESIGN ========= */
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 1rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2.3rem;
+  }
+
+  .hero-text p {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-text p {
+    font-size: 1.2rem;
+  }
+
+  .join-btn {
+    padding: 0.8rem 2rem;
+  }
+}

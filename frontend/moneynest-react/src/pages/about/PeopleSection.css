@@ -1,0 +1,69 @@
+.people-section {
+  background-color: #001a33; /* deep blue */
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.people-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1200px;
+  width: 100%;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* === LEFT TEXT === */
+.people-text h2 {
+  font-size: 2.8rem;
+  line-height: 1.3;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.people-text .highlight {
+  color: #f8d86b; /* gold accent */
+}
+
+.people-text p {
+  color: #d0d8e8;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+/* === RIGHT IMAGE === */
+.people-image img {
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 900px) {
+  .people-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .people-text {
+    order: 2;
+  }
+
+  .people-image {
+    order: 1;
+  }
+
+  .people-text h2 {
+    font-size: 2rem;
+  }
+
+  .people-text p {
+    font-size: 1rem;
+    margin: 0 auto;
+  }
+}

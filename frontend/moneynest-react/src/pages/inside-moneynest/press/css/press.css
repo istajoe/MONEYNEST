@@ -1,0 +1,138 @@
+/* === GLOBALS === */
+.press-page {
+  font-family: "Inter", sans-serif;
+  color: #001a33;
+}
+
+.highlight {
+  color: #f8d86b;
+}
+
+/* === HERO === */
+.press-hero {
+  background-color: #001a33;
+  color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+}
+.press-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.press-hero p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #d0d8e8;
+  line-height: 1.7;
+}
+
+/* === CATEGORIES === */
+.news-categories {
+  padding: 5rem 2rem;
+  text-align: center;
+  background-color: #f9fafc;
+}
+.news-categories h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+.category-card {
+  padding: 2rem;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.category-card:hover {
+  transform: translateY(-6px);
+}
+
+/* === PRESS HIGHLIGHTS === */
+.press-highlights {
+  padding: 5rem 2rem;
+  background-color: white;
+  text-align: center;
+}
+.press-highlights h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+.press-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.press-card {
+  background-color: #001a33;
+  color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  text-align: left;
+  transition: 0.3s ease;
+}
+.press-card:hover {
+  transform: translateY(-5px);
+}
+.read-more {
+  color: #f8d86b;
+  text-decoration: none;
+  font-weight: 500;
+}
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* === NEWSLETTER === */
+.newsletter-section {
+  padding: 5rem 2rem;
+  background-color: #f9fafc;
+  text-align: center;
+}
+.newsletter-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.newsletter-form {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.newsletter-form input {
+  padding: 0.8rem 1.2rem;
+  width: 280px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.newsletter-form button {
+  background-color: #f8d86b;
+  color: #001a33;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.newsletter-form button:hover {
+  background-color: #ffe27f;
+}
+
+/* === PRESS CONTACT === */
+.press-contact {
+  background-color: #001a33;
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.press-contact a {
+  color: #f8d86b;
+  text-decoration: none;
+}
+.press-contact a:hover {
+  text-decoration: underline;
+}

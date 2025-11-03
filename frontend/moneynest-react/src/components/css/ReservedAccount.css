@@ -1,0 +1,52 @@
+.reserved-page {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  background: #f4f7fb;
+  font-family: "Inter", sans-serif;
+}
+
+.reserved-card {
+  width: 100%;
+  max-width: 720px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+  padding: 28px;
+}
+
+.reserved-card h2 {
+  margin-bottom: 8px;
+  color: #0b2545;
+}
+
+.reserved-card p { color: #657387; margin-bottom: 16px; }
+
+.no-accounts { text-align: center; }
+.no-accounts button {
+  background: linear-gradient(90deg,#0056ff,#007bff);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.accounts-list { display: grid; gap: 12px; }
+
+.account {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+}
+
+.account .left .acct { font-weight: 700; margin-top: 6px; font-size: 1.05rem; }
+.account .right .ref { color: #6b7280; font-size: 0.9rem; }
+.hint { margin-top: 12px; color: #6b7280; font-size: 0.9rem; }
+.error { color: #b91c1c; background: rgba(185,28,28,0.06); padding: 8px; border-radius: 6px; }
