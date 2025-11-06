@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+// src/pages/AirtimePurchase.jsx
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./airtimePurchase.css";
+import { AuthContext } from "../context/AuthContext";
 
 const AirtimePurchase = () => {
   const [phone, setPhone] = useState("");
@@ -7,10 +10,13 @@ const AirtimePurchase = () => {
   const [telecom, setTelecom] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
+    // ✅ Validate input
     if (!phone || !amount || !telecom) {
       alert("Please fill all fields");
       return;
@@ -23,25 +29,32 @@ const AirtimePurchase = () => {
     setLoading(true);
 
     try {
-      // Replace this with your actual backend API call
-      // Example:
-      // const res = await fetch("/api/airtime", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ phone, amount, telecom }),
-      // });
-      // const data = await res.json();
+      // ✅ Initiate payment with backend
+      const response = await fetch("http://127.0.0.1:5000/api/initiate-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: parseFloat(amount),
+          customerName: user?.fullName || "Moneynest User",
+          customerEmail: user?.email || "test@moneynest.com",
+          paymentType: "airtime",
+          metadata: { phone, telecom },
+        }),
+      });
 
-      // For now, just show an alert
-      alert(`Purchasing ₦${amount} airtime for ${phone} on ${telecom}`);
+      const data = await response.json();
 
-      // Reset form
-      setPhone("");
-      setAmount("");
-      setTelecom("");
+      if (!response.ok) throw new Error(data.error || "Payment initiation failed");
+
+      // ✅ Redirect user to Monnify hosted payment page
+      if (data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+      } else {
+        alert("Failed to get Monnify payment link");
+      }
     } catch (err) {
-      console.error("Airtime purchase failed:", err);
-      alert("Failed to purchase airtime. Try again.");
+      console.error("Payment error:", err);
+      alert("Unable to start payment. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -63,7 +76,7 @@ const AirtimePurchase = () => {
         </label>
 
         <label>
-          Amount
+          Amount (₦)
           <input
             type="number"
             placeholder="Enter amount"
@@ -75,7 +88,7 @@ const AirtimePurchase = () => {
         </label>
 
         <label>
-          Telecommunication
+          Network Provider
           <select
             value={telecom}
             onChange={(e) => setTelecom(e.target.value)}
@@ -84,13 +97,13 @@ const AirtimePurchase = () => {
             <option value="">Select provider</option>
             <option value="MTN">MTN</option>
             <option value="GLO">GLO</option>
-            <option value="Airtel">Airtel</option>
-            <option value="9mobile">9mobile</option>
+            <option value="AIRTEL">Airtel</option>
+            <option value="9MOBILE">9mobile</option>
           </select>
         </label>
 
         <button type="submit" disabled={loading}>
-          {loading ? "Processing..." : "Purchase"}
+          {loading ? "Processing..." : "Proceed to Pay"}
         </button>
       </form>
     </div>

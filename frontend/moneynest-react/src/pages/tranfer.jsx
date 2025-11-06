@@ -1,7 +1,7 @@
 // src/pages/Transfer.jsx
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "./transfer.css"; // ✅ reuse same styling
+import "./transfer.css";
 
 export default function Transfer() {
   const { user } = useContext(AuthContext);
@@ -37,27 +37,25 @@ export default function Transfer() {
     try {
       setLoading(true);
 
-      const res = await fetch("http://127.0.0.1:5000/api/transactions/withdraw", {
+      // ✅ Include Monnify-required customer details
+      const res = await fetch("http://127.0.0.1:5000/api/initiate-payment", {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: "transfer",
           amount: parseFloat(amount),
-          details: {
-            recipient: recipientName,
-            accountNumber: recipientAccount,
-            bank,
-          },
+          customerName: user.fullName || recipientName,
+          customerEmail: user.email, // must not be empty!
         }),
       });
 
       const data = await res.json();
-      if (res.ok) {
-        alert("✅ Transfer successful!");
-        setFormData({ recipientName: "", recipientAccount: "", bank: "", amount: "" });
+
+      if (res.ok && data.requestSuccessful) {
+        // ✅ Redirect user to Monnify checkout page
+        window.location.href = data.responseBody.checkoutUrl;
       } else {
-        alert(`❌ ${data.error || "Transfer failed"}`);
+        alert(`❌ ${data.responseMessage || data.error || "Payment initiation failed"}`);
       }
     } catch (err) {
       console.error("Error during transfer:", err);
