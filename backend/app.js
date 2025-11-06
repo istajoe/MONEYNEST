@@ -27,7 +27,7 @@ app.use("/api/webhook", webhookRoutes);
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ CORS CONFIG
+//  CORS CONFIG
 
 // Debug route logging
 app.use((req, res, next) => {
@@ -35,18 +35,18 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ ROUTES
+//  ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/transactions", transactionRoutes);
 
 // Health route
 app.get("/", (req, res) => {
-  res.send("✅ MoneyNest API is running...");
+  res.send(" MoneyNest API is running...");
 });
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error("❌ Server Error:", err.stack);
+  console.error(" Server Error:", err.stack);
   res.status(500).json({ msg: "Server error", error: err.message });
 });
 
@@ -72,9 +72,10 @@ app.get("/api/token", async (req, res) => {
 
 // Initialize payment transaction
 app.post("/api/initiate-payment", async (req, res) => {
-  const { amount, customerName, customerEmail } = req.body;
+  const { amount, customerName, customerEmail, paymentType, metadata } = req.body;
+
   try {
-    //Get auth token
+    // Get Monnify auth token
     const credentials = Buffer.from(
       `${process.env.MONNIFY_API_KEY}:${process.env.MONNIFY_SECRET_KEY}`
     ).toString("base64");
@@ -82,24 +83,29 @@ app.post("/api/initiate-payment", async (req, res) => {
     const loginRes = await axios.post(
       `${process.env.MONNIFY_BASE_URL}/api/v1/auth/login`,
       {},
-      { headers: { Authorization: `Basic ${credentials}`} }
+      { headers: { Authorization: `Basic ${credentials}` } }
     );
 
     const token = loginRes.data.responseBody.accessToken;
 
-    // Initiate transaction
+    // Build transaction payload
+    const paymentReference = `MN-${Date.now()}`;
     const payload = {
       amount,
       customerName,
       customerEmail,
-      paymentReference: `MN-${Date.now()}`,
-      paymentDescription: "Moneynest Test Payment",
+      paymentReference,
+      paymentDescription: paymentType
+        ? `Moneynest ${paymentType} Payment`
+        : "Moneynest Payment",
       currencyCode: "NGN",
       contractCode: process.env.MONNIFY_CONTRACT_CODE,
       redirectUrl: "http://localhost:5173/payment-success",
       paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
-    };         
+      metadata: metadata || {},
+    };
 
+    // Initialize transaction on Monnify
     const txRes = await axios.post(
       `${process.env.MONNIFY_BASE_URL}/api/v1/merchant/transactions/init-transaction`,
       payload,
@@ -111,19 +117,34 @@ app.post("/api/initiate-payment", async (req, res) => {
       }
     );
 
-    res.json(txRes.data);
+    const checkoutUrl = txRes.data?.responseBody?.checkoutUrl;
+
+    // Respond cleanly to frontend
+    if (!checkoutUrl) {
+      console.error("Monnify error:", txRes.data);
+      return res
+        .status(400)
+        .json({ error: "Failed to get Monnify checkout URL" });
+    }
+
+    res.json({
+      message: "Payment initialized successfully",
+      paymentUrl: checkoutUrl,
+      reference: paymentReference,
+      gatewayResponse: txRes.data,
+    });
   } catch (err) {
-    console.error(err.response?.data || err.message);
+    console.error("Payment init error:", err.response?.data || err.message);
     res.status(500).json({ error: "Failed to initiate payment" });
   }
 });
 
 
-// ✅ Monnify Webhook Endpoint
+// Monnify Webhook Endpoint
 app.post("/api/webhook", async (req, res) => {
   try {
     const { eventData, eventType } = req.body;
-    console.log("📩 Monnify Webhook Event:", eventType);
+    console.log(" Monnify Webhook Event:", eventType);
 
     if (eventType === "SUCCESSFUL_TRANSACTION") {
       const { paymentReference, amountPaid, customerEmail } = eventData;
@@ -152,7 +173,7 @@ app.post("/api/webhook", async (req, res) => {
 
     res.status(200).send("OK");
   } catch (err) {
-    console.error("❌ Webhook Error:", err.message);
+    console.error(" Webhook Error:", err.message);
     res.status(500).send("Webhook error");
   }
 });
@@ -166,13 +187,13 @@ app.use((req, res) => {
 const startServer = async () => {
   try {
     await connectDB();
-    console.log("✅ MongoDB connected successfully");
+    console.log(" MongoDB connected successfully");
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () =>
-      console.log(`🚀 Server running on port ${PORT}`)
+      console.log(` Server running on port ${PORT}`)
     );
   } catch (err) {
-    console.error("❌ MongoDB connection failed:", err.message);
+    console.error(" MongoDB connection failed:", err.message);
     process.exit(1);
   }
 };

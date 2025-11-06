@@ -110,12 +110,70 @@ router.post("/", requireAuth, validateTransactionRequest, async (req, res) => {
     }
 
     // ==================== 🔸 WITHDRAWAL / TRANSFER / BILL / AIRTIME
-    if (["withdrawal", "transfer"].includes(type)) {
-      if (amount > balance)
-        return res.status(400).json({ error: "Insufficient balance" });
+if (["withdrawal", "transfer"].includes(type)) {
+  if (amount > balance)
+    return res.status(400).json({ error: "Insufficient balance" });
 
-      balance -= amount;
+  balance -= amount;
+}
+
+// 🔸 AIRTIME, DATA, BILL — Initialize Monnify payment (like deposit)
+if (["airtime", "data", "bill"].includes(type)) {
+  const credentials = Buffer.from(
+    `${process.env.MONNIFY_API_KEY}:${process.env.MONNIFY_SECRET_KEY}`
+  ).toString("base64");
+
+  const loginRes = await axios.post(
+    `${process.env.MONNIFY_BASE_URL}/api/v1/auth/login`,
+    {},
+    { headers: { Authorization: `Basic ${credentials}` } }
+  );
+
+  const token = loginRes.data.responseBody.accessToken;
+
+  const paymentReference = `MN-${type.toUpperCase()}-${Date.now()}`;
+
+  const payload = {
+    amount,
+    customerName: user.name,
+    customerEmail: user.email,
+    paymentReference,
+    paymentDescription: `Moneynest ${type.toUpperCase()} Purchase`,
+    currencyCode: "NGN",
+    contractCode: process.env.MONNIFY_CONTRACT_CODE,
+    redirectUrl: "http://localhost:5173/payment-success",
+    paymentMethods: ["CARD", "ACCOUNT_TRANSFER"],
+  };
+
+  const txRes = await axios.post(
+    `${process.env.MONNIFY_BASE_URL}/api/v1/merchant/transactions/init-transaction`,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     }
+  );
+
+  // Save pending airtime/data/bill transaction
+  const transaction = await Transaction.create({
+    user: req.user._id,
+    type,
+    amount,
+    details: details || {},
+    status: "pending",
+    reference: paymentReference,
+    gatewayResponse: txRes.data,
+  });
+
+  return res.status(201).json({
+    message: `${type} payment initialized successfully`,
+    transaction,
+    paymentLink: txRes.data.responseBody.checkoutUrl,
+  });
+}
+
 
     user.balance = balance;
     await user.save();

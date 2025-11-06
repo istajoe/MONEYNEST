@@ -16,29 +16,35 @@ const AirtimePurchase = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Validate input
     if (!phone || !amount || !telecom) {
-      alert("Please fill all fields");
+      alert("⚠️ Please fill all fields");
       return;
     }
+
     if (amount < 50) {
-      alert("Minimum amount is ₦50");
+      alert("⚠️ Minimum purchase is ₦50");
       return;
     }
 
     setLoading(true);
 
     try {
-      // ✅ Initiate payment with backend
+      // ✅ Initiate airtime payment with backend (authenticated)
       const response = await fetch("http://127.0.0.1:5000/api/initiate-payment", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
         body: JSON.stringify({
           amount: parseFloat(amount),
           customerName: user?.fullName || "Moneynest User",
           customerEmail: user?.email || "test@moneynest.com",
           paymentType: "airtime",
-          metadata: { phone, telecom },
+          metadata: {
+            phone,
+            telecom,
+          },
         }),
       });
 
@@ -46,15 +52,32 @@ const AirtimePurchase = () => {
 
       if (!response.ok) throw new Error(data.error || "Payment initiation failed");
 
-      // ✅ Redirect user to Monnify hosted payment page
+      // ✅ If Monnify payment link is returned
       if (data.paymentUrl) {
+        // Save a pending transaction before redirecting
+        await fetch("http://127.0.0.1:5000/api/transactions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            type: "Airtime Purchase",
+            amount: parseFloat(amount),
+            phone,
+            telecom,
+            status: "pending",
+          }),
+        });
+
+        // ✅ Redirect to Monnify hosted payment page
         window.location.href = data.paymentUrl;
       } else {
-        alert("Failed to get Monnify payment link");
+        alert("❌ Failed to get Monnify payment link. Try again.");
       }
     } catch (err) {
       console.error("Payment error:", err);
-      alert("Unable to start payment. Please try again.");
+      alert("❌ Unable to start payment. Please try again.");
     } finally {
       setLoading(false);
     }
