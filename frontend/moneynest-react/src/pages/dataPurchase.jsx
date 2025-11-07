@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./dataPurchase.css";
+import { AuthContext } from "../context/AuthContext";
 
 const DataPurchase = () => {
   const [phone, setPhone] = useState("");
@@ -8,29 +9,56 @@ const DataPurchase = () => {
   const [telecom, setTelecom] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const { user } = useContext(AuthContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
+    //  Validate form
     if (!phone || !amount || !dataPlan || !telecom) {
       alert("Please fill all fields");
+      return;
+    }
+
+    if (parseFloat(amount) < 100) {
+      alert("Minimum amount is ₦100");
       return;
     }
 
     setLoading(true);
 
     try {
-      // Replace this with actual API call to purchase data
-      alert(`Purchasing ${dataPlan} for ${phone} on ${telecom} at ₦${amount}`);
+      // Call your backend to initiate Monnify payment
+      const response = await fetch("http://127.0.0.1:5000/api/initiate-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: parseFloat(amount),
+          customerName: user?.fullName || "Moneynest User",
+          customerEmail: user?.email || "test@moneynest.com",
+          paymentType: "data",
+          metadata: { phone, telecom, dataPlan },
+        }),
+      });
 
-      // Reset form
-      setPhone("");
-      setAmount("");
-      setDataPlan("");
-      setTelecom("");
+      const data = await response.json();
+
+      if (!response.ok) throw new Error(data.error || "Payment initiation failed");
+
+      //  Redirect user to Monnify payment page
+      const paymentUrl =
+        data.paymentUrl ||
+        data.responseBody?.checkoutUrl ||
+        data.responseBody?.paymentLink;
+
+      if (paymentUrl) {
+        window.location.href = paymentUrl;
+      } else {
+        alert("Failed to get Monnify payment link. Try again.");
+      }
     } catch (err) {
-      console.error("Data purchase failed:", err);
-      alert("Failed to purchase data. Try again.");
+      console.error(" Payment error:", err);
+      alert("Unable to start data purchase. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -52,7 +80,7 @@ const DataPurchase = () => {
         </label>
 
         <label>
-          Amount
+          Amount (₦)
           <input
             type="number"
             placeholder="Enter amount"
@@ -89,13 +117,13 @@ const DataPurchase = () => {
             <option value="">Select Provider</option>
             <option value="MTN">MTN</option>
             <option value="GLO">GLO</option>
-            <option value="Airtel">Airtel</option>
-            <option value="9mobile">9mobile</option>
+            <option value="AIRTEL">Airtel</option>
+            <option value="9MOBILE">9mobile</option>
           </select>
         </label>
 
         <button type="submit" disabled={loading}>
-          {loading ? "Processing..." : "Purchase"}
+          {loading ? "Processing..." : "Proceed to Pay"}
         </button>
       </form>
     </div>

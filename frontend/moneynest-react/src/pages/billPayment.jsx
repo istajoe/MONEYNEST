@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./billPayment.css";
+import { createTransaction } from "../api/api";
+import { AuthContext } from "../context/AuthContext";
 
 const BillPayment = () => {
   const [billerType, setBillerType] = useState("");
@@ -7,33 +9,57 @@ const BillPayment = () => {
   const [amount, setAmount] = useState("");
   const [provider, setProvider] = useState("");
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!billerType || !accountNumber || !amount || !provider) {
-      alert("Please fill all fields");
-      return;
+  if (!billerType || !accountNumber || !amount || !provider) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  setLoading(true);
+  try {
+    // Call your backend to initiate Monnify payment
+    const response = await fetch("http://127.0.0.1:5000/api/initiate-payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: parseFloat(amount),
+        customerName: user?.fullName || "Moneynest User",
+        customerEmail: user?.email || "test@moneynest.com",
+        paymentType: "bill",
+        metadata: {
+          billerType,
+          accountNumber,
+          provider,
+        },
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) throw new Error(data.error || "Payment initiation failed");
+
+    // Redirect user to Monnify payment page
+    const paymentUrl =
+      data.paymentUrl ||
+      data.responseBody?.checkoutUrl ||
+      data.responseBody?.paymentLink;
+
+    if (paymentUrl) {
+      window.location.href = paymentUrl;
+    } else {
+      alert("Failed to get Monnify payment link. Try again.");
     }
-
-    setLoading(true);
-
-    try {
-      // Replace this with actual API call to pay the bill
-      alert(`Paying ₦${amount} for ${billerType} (Account: ${accountNumber}) on ${provider}`);
-
-      // Reset form
-      setBillerType("");
-      setAccountNumber("");
-      setAmount("");
-      setProvider("");
-    } catch (err) {
-      console.error("Bill payment failed:", err);
-      alert("Failed to pay bill. Try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  } catch (err) {
+    console.error("Payment error:", err);
+    alert("Bill payment failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="bill-container">
@@ -67,7 +93,7 @@ const BillPayment = () => {
         </label>
 
         <label>
-          Amount
+          Amount (₦)
           <input
             type="number"
             placeholder="Enter amount"
@@ -90,7 +116,7 @@ const BillPayment = () => {
         </label>
 
         <button type="submit" disabled={loading}>
-          {loading ? "Processing..." : "Pay Bill"}
+          {loading ? "Processing..." : "Proceed to Pay"}
         </button>
       </form>
     </div>
